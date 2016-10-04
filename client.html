@@ -1,0 +1,146 @@
+<html>
+    <head>
+    <title>g</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body><table><tr><td width="500">
+    <button id="j">Join</button>
+     <button id="e">Logoff</button>
+     <div><button class="ChangeRooms" id="room">My Room</button> <button class="ChangeRooms" id="bossroom">Boss Room</button>
+     <button class="ChangeRooms" id="movies">Movies</button>
+      <button class="ChangeRooms" id="ads">Ads</button><button class="ChangeRooms" id="scheduling">Scheduling</button>
+     </div>
+    
+    <h2 id="roomname">Main</h2>
+   
+    
+
+   
+    <div id="game"></div>
+</td><td>
+    <ul id="messages"></ul>
+    <form action="" id="send">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+</td></tr></table>
+
+ <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $("#e").hide();
+      var socket = io();
+
+      $('.ChangeRooms').click(function(){ 
+        console.log('in change rooms');
+        socket.emit('ChangeRooms', $(this).attr('id'));
+        return false;
+      });
+
+      $('#send').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      $('#e').click(function(){ 
+        console.log('in e');
+        //$('#m').val('');
+        socket.emit('logout', '12345');
+        return false;
+      });
+
+      $('#j').click(function(){ 
+        socket.emit('login', '12345');
+        return false;
+      });
+	  
+	
+	  socket.on('changecurrentroom', function(room, color, data){
+		  	createRoom(room, color, data);
+	  });
+	  
+      socket.on('loggedin', function(msg){
+        $("#j").hide();
+        $("#e").show();
+      });
+
+      socket.on('loggedoff', function(msg){
+        $("#e").hide();
+        $("#j").show();
+      });
+
+      socket.on('newgame', function(title, color){
+        $('#roomname').html(title);
+
+        var myEntity = Crafty.e('2D, Canvas, Color, Mouse')
+.attr({x: 10, y: 10, w: 40, h: 40})
+.color('red')
+.bind('Click', function(MouseEvent){
+  alert('clicked', MouseEvent);
+});
+
+myEntity.bind('MouseUp', function(e) {
+   if( e.mouseButton == Crafty.mouseButtons.RIGHT )
+       Crafty.log("Clicked right button");
+});
+        
+         //Crafty.e("HTML")
+   		//	.attr({x:20, y:20, w:100, h:100})
+   		//	.replace("New Game");
+         Crafty.background("#FFFFFF");
+      });
+
+      socket.on('endgame', function(title, color){
+        $('#roomname').html(title);
+         //Crafty.e("HTML")
+   		//	.attr({x:20, y:20, w:100, h:100})
+   		//	.replace("<h4 style=\"color: #FFFFFF;\">Game Over</h4>");
+         Crafty.background("#000000");
+      });
+/*
+      socket.on('roomtitle', function(title, color){
+        $('#roomname').html(title);
+        Crafty.background("#"+color);
+      });
+	 */
+
+/*
+      socket.on('changecurrentroom', function(object){
+      			var myEntity='';
+      			for(var i=1; i<=5; i++){
+	      			myEntity = Crafty.e('2D, Canvas, Color, Mouse')
+									.attr({x: (i*55), y: i, w: 40, h: 40})
+									.color('red')
+									.bind('Click', function(MouseEvent){
+	  									alert('clicked', MouseEvent);
+									});
+
+					myEntity.d('MouseUp', function(e) {
+	   				if( e.mouseButton == Crafty.mouseButtons.RIGHT )
+	       				Crafty.log("Clicked right button");
+					});  
+				}		
+   	   });
+	  */
+
+      socket.on('chat message', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+    </script>
+    <script type="text/javascript" src="https://rawgithub.com/craftyjs/Crafty/release/dist/crafty-min.js"></script>
+        <script>
+    //  Crafty.init(1000,750, document.getElementById('game'));
+      Crafty.init(480, 320, document.getElementById('game'));
+      Crafty.background('#2d3d4b');
+     // Crafty.e('2D, DOM, Color').attr({x: 0, y: 0, w: 100, h: 100}).color('#F00');
+    </script>
+  </body>
+</html>
