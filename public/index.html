@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+	<head>
+		<title>Hello React</title>
+		<script src="http://fb.me/react-0.13.2.js"></script>
+		<script src="http://fb.me/JSXTransformer-0.13.2.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+		<link rel="stylesheet" href="style.css" />
+
+    
+  
+    
+      <script type="text/javascript" src="https://fb.me/react-with-addons-0.14.8.js"></script>
+    
+  
+    
+      <script type="text/javascript" src="https://fb.me/react-dom-0.14.8.js"></script>
+    
+  
+    
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react-slick/0.11.0/react-slick.js"></script>
+    
+  
+    
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.css">
+    
+  
+    
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.css">
+	</head>
+	<body>
+    	<div id="main"></div>
+		<div id="content"></div>
+      
+		<script src="/socket.io/socket.io.js"></script><script type="application/javascript;version=1.7" language="JavaScript 1.7">//<![CDATA[
+
+
+
+var ReactSlickDemo = React.createClass({
+  render: function() {
+  	var settings = {
+    	dots: true
+    }
+    return (
+    	<div className='container'>aassa
+      	<Slider {...settings}>
+        	<img src='http://placekitten.com/g/400/200' />
+          <img src='http://placekitten.com/g/400/200' />
+          <img src='http://placekitten.com/g/400/200' />
+          <img src='http://placekitten.com/g/400/200' />
+        </Slider>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <ReactSlickDemo />,
+  document.getElementById('container')
+);
+
+
+//]]> 
+</script>
+		<script type="text/jsx" src="app.jsx"></script>
+        
+        
+	</body>
+</html> 

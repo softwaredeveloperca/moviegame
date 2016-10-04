@@ -1,0 +1,64 @@
+body {
+	background: #ddd;
+	padding: 0;
+	margin: 0;
+}
+
+#main {
+	background: white;
+	padding: 50px;
+	width: 600px;
+	margin: auto;
+}
+#content {
+	background: white;
+	padding: 50px;
+	width: 600px;
+	margin: auto;
+}
+
+.comment {
+	border: 1px #ddd solid;
+	padding: 20px;
+}
+.comment .author {
+	font-weight: bold;
+}
+.comment .body {
+	padding-top: 5px;
+}
+
+.commentForm {
+	margin-top: 20px;
+}
+.commentForm input,
+.commentForm textarea {
+	width: 100%;
+	margin-bottom: 5px;
+	border: 1px #ddd solid;
+	padding: 5px;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
+}
